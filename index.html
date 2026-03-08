@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Synkron | EON Elevators Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-wrap">
+          <div class="brand-box">SYN</div>
+          <div>
+            <div class="brand-text">SYNKRON</div>
+            <div class="brand-sub">EON Elevators AI Ops</div>
+          </div>
+        </div>
+
+        <nav class="nav-links">
+          <button class="nav-btn active" data-view="dashboard-view">Dashboard</button>
+          <button class="nav-btn" data-view="troubleshoot-view">Troubleshoot</button>
+          <button class="nav-btn" data-view="guides-view">Guides</button>
+          <button class="nav-btn" data-view="meetings-view">Meetings</button>
+          <button class="nav-btn" data-view="reports-view">Reports</button>
+        </nav>
+
+        <div class="profile">Logged in: Ajay Kumar S</div>
+      </aside>
+
+      <main class="content-shell">
+        <section id="dashboard-view" class="view active-view">
+          <section class="hero card">
+            <h1>Mission Control</h1>
+            <p>All core operations in one place. Track technicians, meetings, and service insights.</p>
+          </section>
+
+          <section class="stats-grid">
+            <article class="stat-card card"><h3>Total Sessions</h3><p id="stat-sessions">0</p></article>
+            <article class="stat-card card"><h3>Problems Solved</h3><p id="stat-solved" class="green">0</p></article>
+            <article class="stat-card card"><h3>Reports Generated</h3><p id="stat-reports" class="blue">0</p></article>
+            <article class="stat-card card"><h3>Meetings Scheduled</h3><p id="stat-meetings" class="orange">0</p></article>
+          </section>
+
+          <section class="dashboard-row">
+            <article class="panel card">
+              <h2>Quick Actions</h2>
+              <button class="quick-link nav-jump" data-view="troubleshoot-view">Start Troubleshooting <span>→</span></button>
+              <button class="quick-link nav-jump" data-view="guides-view">Open Site Guide <span>→</span></button>
+              <button class="quick-link nav-jump" data-view="meetings-view">Schedule Meeting <span>→</span></button>
+              <button class="quick-link nav-jump" data-view="reports-view">Generate Reports <span>→</span></button>
+            </article>
+            <article class="panel card">
+              <h2>Recent Activity</h2>
+              <div id="recent-activity" class="activity-list"></div>
+            </article>
+          </section>
+        </section>
+
+        <section id="meetings-view" class="view">
+          <section class="card" id="meeting-card">
+            <h2>Meeting Scheduler</h2>
+            <p class="muted">Type naturally. Synkron captures agenda + attendee email memory.</p>
+            <label for="nl-input">Meeting request</label>
+            <input id="nl-input" placeholder="Schedule a meeting for day after tomorrow at 11am" />
+            <button id="parse-btn">Parse Request</button>
+
+            <div id="meeting-form" class="stack hidden">
+              <p id="meeting-time"></p>
+              <label for="agenda">Agenda</label>
+              <input id="agenda" placeholder="Weekly project review" />
+              <label for="attendees">Attendees (comma-separated names)</label>
+              <input id="attendees" placeholder="Ajay, Rahul, Priya" />
+              <div id="email-collection" class="stack"></div>
+              <button id="schedule-btn">Schedule Meeting</button>
+            </div>
+            <div id="meeting-output" class="output"></div>
+          </section>
+        </section>
+
+        <section id="troubleshoot-view" class="view">
+          <section class="card" id="tech-card">
+            <h2>Technician Troubleshoot</h2>
+            <p class="muted">Simple checks, clear outputs, and video guidance for field support.</p>
+            <label for="issue-input">Issue description</label>
+            <input id="issue-input" placeholder="Blower is not working" />
+            <button id="diagnose-btn">Get Guidance</button>
+            <div id="issue-response" class="output"></div>
+            <div class="inline-actions">
+              <button id="mark-resolved">Mark Resolved</button>
+              <button id="mark-pending">Mark Pending</button>
+            </div>
+          </section>
+        </section>
+
+        <section id="reports-view" class="view">
+          <section class="card" id="reports-card">
+            <h2>Service Reports</h2>
+            <p class="muted">Issue analytics and downloadable PDF for admin review.</p>
+            <div id="metrics" class="metrics"></div>
+            <button id="download-report">Download PDF Report</button>
+          </section>
+        </section>
+
+        <section id="guides-view" class="view">
+          <section class="card" id="sales-card">
+            <h2>Sales & Site Visit Guide</h2>
+            <ul>
+              <li>Site dimensions and shaft measurement verification.</li>
+              <li>Power availability and earthing readiness.</li>
+              <li>Civil readiness (pit depth, headroom, machine room).</li>
+              <li>Access constraints for material movement and manpower.</li>
+              <li>Customer expectations, usage pattern, and compliance needs.</li>
+              <li>Risk/challenge logging with mitigation and target resolution date.</li>
+            </ul>
+            <label for="site-challenges">Site challenge notes</label>
+            <textarea id="site-challenges" rows="4" placeholder="Example: Pit depth short by 150mm, civil correction needed by 20 Mar"></textarea>
+            <button id="save-site-note">Save Site Visit Note</button>
+            <div id="site-output" class="output"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
